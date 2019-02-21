@@ -1,0 +1,9 @@
+<div class="card border-light text-center">
+  <h4 class="card-header" *ngIf="title; else noTitle">{{ title }}</h4>
+  <ng-template #noTitle>
+    <span class="card-header" style="padding-top: 40px;"></span>
+  </ng-template>
+  <div class="card-block text-justify">
+    <ng-content></ng-content>
+  </div>
+</div>

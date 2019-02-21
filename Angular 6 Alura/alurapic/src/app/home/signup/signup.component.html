@@ -1,0 +1,98 @@
+<h4 class="text-center">Register to embrace a new world!</h4>
+
+<form [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
+  <div class="form-group">
+    <input
+      #emailInput
+      class="form-control"
+      placeholder="email"
+      autofocus
+      formControlName="email"
+    />
+    <ap-vmessage
+      text="Email is required!"
+      *ngIf="signupForm.get('email').hasError('required')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Invalid Email!"
+      *ngIf="signupForm.get('email').hasError('email')"
+    ></ap-vmessage>
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      placeholder="full name"
+      formControlName="fullName"
+    />
+    <ap-vmessage
+      text="Full Name is required!"
+      *ngIf="signupForm.get('fullName').hasError('required')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Minimum length is 2"
+      *ngIf="signupForm.get('fullName').hasError('minlength')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Maximum length is 40"
+      *ngIf="signupForm.get('fullName').hasError('maxlength')"
+    ></ap-vmessage>
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      placeholder="user name"
+      formControlName="userName"
+    />
+    <ap-vmessage
+      text="User Name is required!"
+      *ngIf="signupForm.get('userName').hasError('required')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Minimum length is 2"
+      *ngIf="signupForm.get('userName').hasError('minlength')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Maximum length is 30"
+      *ngIf="signupForm.get('userName').hasError('maxlength')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Must be lower case"
+      *ngIf="signupForm.get('userName').hasError('lowerCase')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="User Name already taken"
+      *ngIf="signupForm.get('userName').hasError('userNameTaken')"
+    ></ap-vmessage>
+    <small *ngIf="signupForm.get('userName').valid" class="text-success">User available</small>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control"
+      placeholder="password"
+      formControlName="password"
+    />
+    <ap-vmessage
+      text="Password is required!"
+      *ngIf="signupForm.get('password').hasError('required')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Minimum length is 8"
+      *ngIf="signupForm.get('password').hasError('minlength')"
+    ></ap-vmessage>
+    <ap-vmessage
+      text="Maximum length is 14"
+      *ngIf="signupForm.get('password').hasError('maxlength')"
+    ></ap-vmessage>
+  </div>
+
+  <!-- pending: Usado para quando existe alguma validação assíncrona sendo executada. -->
+  <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">
+    Register
+  </button>
+
+  <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
+</form>

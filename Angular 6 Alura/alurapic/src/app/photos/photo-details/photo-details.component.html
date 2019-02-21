@@ -1,0 +1,37 @@
+<div class="bg-white border" *ngIf="(photo$ | async) as photo">
+  <div class="row">
+    <div class="col-lg-8">
+      <ap-photo [url]="photo.url" [description]="photo.description"></ap-photo>
+    </div>
+
+    <div class="col-lg-4 p-4">
+      <small>
+        <p class="text-left break-word">{{ photo.description }}</p>
+        <div class="text-left mb-4">
+          <!-- Só irá mostrar o ícone de 'like' se o usuário estiver logado. -->
+          <i apShowIfLogged class="fa fa-heart-o fa-2x mr-2 pull-left" (click)="like(photo)">
+            {{ photo.likes }}
+          </i>
+          <i class="fa fa-comment-o fa-2x mr-2 ml-2"></i>{{ photo.comments }}
+          <!-- Só exibe o botão de excluir foto se o usuário logado for o proprietário da foto. -->
+          <!-- É passado com parâmetro para a diretiva 'ownedPhoto' o objeto de 'photo' que contém o id de seu proprietário. -->
+          <i
+            class="fa fa-trash-o fa-2x pull-right"
+            (click)="remove()"
+            apPhotoOwnerOnly
+            [ownedPhoto]="photo"
+          ></i>
+        </div>
+        <hr />
+      </small>
+
+      <ap-photo-comments
+        [photoID]="photoID"
+        *ngIf="photo.allowComments; else warning"
+      ></ap-photo-comments>
+      <ng-template #warning>
+        <p>User has disbaled comments for this photo</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

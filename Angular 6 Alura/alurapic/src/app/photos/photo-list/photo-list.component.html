@@ -1,0 +1,10 @@
+<!-- Recebe o valor de filter do componente pai. -->
+<ap-search (onTyping)="filter = $event" [value]="filter"></ap-search>
+<!-- Pipe filterByDescription, receberá dois valores: -->
+<!-- *photos que será o atibuto que sofrerá a ação aplicada pelo pipe -->
+<!--
+  *filter que será o valor passado para o pipe que irá ser utilizado para realizar o filtro em photos
+-->
+<ap-photos [photos]="photos | filterByDescription: filter"></ap-photos>
+
+<ap-load-button (click)="load()" [hasMore]="hasMore"></ap-load-button>

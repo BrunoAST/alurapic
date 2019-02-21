@@ -1,0 +1,42 @@
+<h4 class="text-center">Login</h4>
+
+<form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
+  <div class="form-group">
+    <!-- Variável de template 'userNameInput' -->
+    <!-- Guarda a referência do elemento em que foi declarado. -->
+    <input
+      #userNameInput
+      class="form-control"
+      placeholder="user name"
+      autofocus
+      formControlName="userName"
+    />
+    <ap-vmessage
+      text="User Name is required!"
+      *ngIf="loginForm.get('userName').hasError('required')"
+    ></ap-vmessage>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control"
+      placeholder="password"
+      formControlName="password"
+    />
+    <ap-vmessage
+      text="Password is required!"
+      *ngIf="loginForm.get('password').hasError('required')"
+    ></ap-vmessage>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary btn-block"
+    [disabled]="loginForm.invalid"
+  >
+    login
+  </button>
+</form>
+
+<p>Not a user? <a [routerLink]="['signup']">Register now</a></p>
